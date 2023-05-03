@@ -5,7 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<int> numbers = new List<int>();
+        var numbers = new List<int>();
         int input_number = -1;
 
         while (input_number != 0){
