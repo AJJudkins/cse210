@@ -6,10 +6,10 @@ class Entry
     public string _prompt;
     public string _date;
 
-    public void formatEntry(Journal journal, string _date, string _prompt, string _text){
+    public Entry(string date, string prompt, string text){
         // This is to format the entry to the proper way to be stored.
-        Entry entry = $"{_date};{_prompt};{_text};";
-
-        journal.journal.Add(entry);
+        _text = text;
+        _prompt = prompt;
+        _date = date;
     }
 }

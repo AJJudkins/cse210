@@ -5,7 +5,7 @@ class FileEditor {
 
     public void SaveJournal(Journal journal, string filename){
         using (StreamWriter outputFile = new StreamWriter(filename)){
-            foreach (var entry in journal.journal){
+            foreach (var entry in journal.entries){
                 string data = $"{entry._date};{entry._prompt};{entry._text};";
                 outputFile.WriteLine(data);
             }
@@ -22,12 +22,9 @@ class FileEditor {
             string prompt = parts[1];
             string text = parts[2];
 
-            Entry entry = new Entry();
-            entry._date = date;
-            entry._prompt = prompt;
-            entry._text = text;
+            Entry entry = new Entry(date, prompt, text);
 
-            journal.journal.Add(entry);
+            journal.entries.Add(entry);
         }
 
         return journal;

@@ -35,8 +35,8 @@ class Program
                 string text = Console.ReadLine();
 
                 // This sends the information to the  entry class to format the entry.
-                var Entry = new Entry();
-                Entry.formatEntry(Journal, dateText, prompt, text);
+                var Entry = new Entry( dateText, prompt, text);
+                Journal.Add(Entry);
             } 
             else if (response == 2){
 
