@@ -4,45 +4,64 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Object or instance of the class. The word "new" means to create a new object from the class.
-        var ryan = new Person("Ryan", "Reynolds");
-        var austin = new Person("Austin", "Judkins");
+        var hourly = new HourlyEmployee(100, "Elon Musk", 14);
+        var salary = new SalaryEmployee(90000, "Austin Judkins", 14);
 
-        austin.Talk();
-        ryan.Talk();
+        var employess = new List<Employee> {hourly, salary};
+
+        foreach (var employee in employess)
+        {
+            Console.WriteLine(employee._name);
+            Console.WriteLine(employee.PayPeriodWages());
+        }
     }
 }
 
-// Classification
-class Person {
+class Employee
+{
+    public string _name;
 
-// Here we want to define behaviors and attributes
+    protected double _payPeriod;
 
-//Attributes or properties
-string firstName;
-string lastName;
+    public Employee(string name, int payPeriod)
+    {
+        _name = name;
+        _payPeriod = payPeriod;
+    }
 
-// Constructor 
-public Person(string fn, string ln){
-    firstName = fn;
-    lastName = ln;
+    virtual public double PayPeriodWages()
+    {
+        return 0;
+    }
 }
 
-//Behaviors or methods
-public void Breathe(){
-Console.WriteLine("Breathing");
+
+class HourlyEmployee: Employee
+{
+    double _rate;
+
+    public HourlyEmployee(double rate, string name, int payPeriod): base(name, payPeriod)
+    {
+        _rate = rate;
+    }
+    public override double PayPeriodWages()
+    {
+        return _rate * 8 *_payPeriod;
+    }
 }
 
-public void Walk(){
-Console.WriteLine("Walking");
-}
+class SalaryEmployee : Employee
+{
+    double _annualRate;
 
-public void Talk(){
-Console.WriteLine($"Hi! My name is {FullName()}.");
-}
+    public SalaryEmployee(double annualRate, string name, int payPeriod): base(name, payPeriod)
+    {
+        _annualRate = annualRate;
+    }
 
-public string FullName(){
-    string full = string.Concat(firstName, lastName);
-    return full;
-}
+    public override double PayPeriodWages()
+    {
+        return (_payPeriod / 365) * _annualRate;
+    }
+
 }
